@@ -3,7 +3,7 @@ from django.db.models import Q, F, Value, Func, Count, ExpressionWrapper, Decima
 from django.db.models.functions import Concat
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.aggregates import Avg, Sum, Max, Min, Count
-from store.models import Product, OrderItem, Order, Costumer, Collection
+from store.models import Product, OrderItem, Order, Customer, Collection
 from tags.models import TaggedItem
 from django.contrib.contenttypes.models import ContentType
 from django.db import transaction, connection
@@ -48,22 +48,22 @@ def say_hello(request):
     # query_set = Product.objects.prefetch_related(
     #     'promotions').select_related('collection').all()
 
-    # query_set = Order.objects.select_related('costumer').prefetch_related('orderitem_set__product').order_by('-placed_at')[:5]
+    # query_set = Order.objects.select_related('customer').prefetch_related('orderitem_set__product').order_by('-placed_at')[:5]
     # result = Product.objects.aggregate(
     #     count=Count('sku'), min_price=Min('unit_price'))
 
-    # queryset = Costumer.objects.annotate(is_new=Value(True))
-    # queryset = Costumer.objects.annotate(new_id=F('id')+1)
-    # queryset = Costumer.objects.annotate(
+    # queryset = Customer.objects.annotate(is_new=Value(True))
+    # queryset = Customer.objects.annotate(new_id=F('id')+1)
+    # queryset = Customer.objects.annotate(
     #     # CONCAT
     #     full_name=Func(F('first_name'), Value(" "), F("last_name"), function='CONCAT')
     #     )
-    # queryset = Costumer.objects.annotate(
+    # queryset = Customer.objects.annotate(
     #     # CONCAT
     #     full_name=Concat('first_name', Value(" "),'last_name')
     #     )
 
-    # queryset = Costumer.objects.annotate(
+    # queryset = Customer.objects.annotate(
     #     orders_count=Count('order')
     # )
 
@@ -111,7 +111,7 @@ def say_hello(request):
     
     # with transaction.atomic():
     #     order = Order()
-    #     order.costumer_id=1
+    #     order.customer_id=1
     #     order.save()
         
     #     item = OrderItem()
@@ -128,7 +128,7 @@ def say_hello(request):
     # cursor.execute("SELECT")
     # cursor.close()
     
-    with connection.cursor() as cursor:
-        cursor.callproc('get_customers',[1,2,3])
+    # with connection.cursor() as cursor:
+    #     cursor.callproc('get_customers',[1,2,3])
     
     return render(request, 'hello.html', {'name': "Amir"})
