@@ -24,7 +24,6 @@ class Collection(models.Model):
 
 
 class Product(models.Model):
-    id = models.CharField(max_length=10, primary_key=True)
     title = models.CharField(max_length=255)
     description = models.TextField()
     slug = models.SlugField()
