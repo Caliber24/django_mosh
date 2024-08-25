@@ -83,6 +83,9 @@ class Customer(models.Model):
         #     models.Index(fields=['last_name', 'first_name'])
         # ]
         ordering = ['user__first_name','user__last_name']
+        permissions = [
+            ('view_history', 'Can view history')
+        ]
 
     def given_name(self):
         return self.first_name
