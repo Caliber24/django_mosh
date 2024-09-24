@@ -50,6 +50,16 @@ class CollectionAdmin(admin.ModelAdmin):
         )
 
 
+class ProductImageInline(admin.TabularInline):
+    model = models.ProductImage
+    readonly_fields = ['thumbnail']
+
+    def thumbnail(self, instance):
+        if instance.image.name != '':
+            return format_html(f"<img src='{instance.image.url}' class='thumbnail' />")
+        return ''
+    
+    
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     # fields =['title', 'slug']
@@ -60,6 +70,7 @@ class ProductAdmin(admin.ModelAdmin):
         'slug': ['title']
     }
     actions = ['clear_inventory']
+    inlines = [ProductImageInline]
     # inlines = [TagInline]
     list_display = ['title', 'unit_price',
                     'inventory_status', 'collection_title']
@@ -87,6 +98,10 @@ class ProductAdmin(admin.ModelAdmin):
     def collection_title(self, product):
         return product.collection.title
 
+    class Media:
+        css = {
+            'all': ['store/style.css']
+        }
 
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
