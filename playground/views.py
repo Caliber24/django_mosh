@@ -1,3 +1,4 @@
+from django.core.mail import EmailMessage, send_mail, mail_admins, BadHeaderError
 from django.shortcuts import render
 from django.db.models import Q, F, Value, Func, Count, ExpressionWrapper, DecimalField
 from django.db.models.functions import Concat
@@ -7,6 +8,7 @@ from store.models import Product, OrderItem, Order, Customer, Collection
 from tags.models import TaggedItem
 from django.contrib.contenttypes.models import ContentType
 from django.db import transaction, connection
+from templated_mail.mail import BaseEmailMessage
 # Create your views here.
 
 # @transaction.atomic()
@@ -131,4 +133,18 @@ def say_hello(request):
     # with connection.cursor() as cursor:
     #     cursor.callproc('get_customers',[1,2,3])
     
+    try:
+        # send_mail('subject', 'message', 'amirhosseinpishro@gmail.com', ['pishrowamir100@gmail.com'])
+        # mail_admins('subject', 'message', html_message='<h2>message</h2>')
+        
+        # message = EmailMessage('subject', 'message', 'from@amir.com', ['amir@amir.com'])
+        # message.attach_file('playground/static/images/download.png')
+        # message.send()
+        message = BaseEmailMessage(
+            template_name='emails/hello.html',
+            context={'name': 'Amir'}
+        )
+        message.send(['pihrowamir100@gmail.com'])
+    except BadHeaderError:
+        pass
     return render(request, 'hello.html', {'name': "Amir"})
