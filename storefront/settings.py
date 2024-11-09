@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'storefront.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'storefront2',
+        'NAME': 'storefront',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': '3831@Amir'
+        'PASSWORD': 'P@ssword'
     }
 }
 
@@ -182,3 +182,5 @@ DEFAULT_FROM_EMAIL = 'amirhosseinpishroa2001@gmail.com'
 ADMINS = [
     ('Amir', 'amir@gmail.com')
 ]
+
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
