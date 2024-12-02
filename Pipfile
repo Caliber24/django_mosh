@@ -19,6 +19,7 @@ django-rest-framework = "*"
 django-rest-framework-nested = "*"
 djoser = "*"
 drf-nested-routers = "*"
+redis = "*"
 
 [dev-packages]
 

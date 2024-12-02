@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': 'storefront',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': 'P@ssword'
+        'PASSWORD': '3831-Amir'
     }
 }
 
@@ -183,4 +183,5 @@ ADMINS = [
     ('Amir', 'amir@gmail.com')
 ]
 
-CELERY_BROKER_URL = 'redis://localhost:6379/1'
+# CELERY SETTINGS 
+# CELERY_BROKER_URL = 'redis://localhost:6379/1'
